@@ -17,6 +17,7 @@ sap.ui.define([
 	return Controller.extend("test.test.controller.View1", {
 
 		bodySnake: function (x, y) {
+			//Zeichnet ein Schlangen-Quadrat an die X,Y Stelle
 			ctx.fillStyle = 'green';
 			ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
 			ctx.strokeStyle = 'darkgreen';
@@ -24,6 +25,7 @@ sap.ui.define([
 		},
 
 		pizza: function (x, y) {
+			//Zeichnet ein Pizza-Quadrat an die X,Y Stelle
 			ctx.fillStyle = 'yellow';
 			ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
 			ctx.fillStyle = 'red';
@@ -31,12 +33,14 @@ sap.ui.define([
 		},
 
 		scoreText: function () {
+			//Erstellt den scoreText
 			var score_text = "Score: " + score;
 			ctx.fillStyle = 'blue';
 			ctx.fillText(score_text, 145, h - 5);
 		},
 
 		drawSnake: function () {
+			//Inital Draw Snake
 			var length = 4;
 			snake = [];
 			for (var i = length - 1; i >= 0; i--) {
@@ -48,6 +52,7 @@ sap.ui.define([
 		},
 
 		paint: function () {
+			//Die Loopfunktion
 			ctx.fillStyle = 'lightgrey';
 			ctx.fillRect(0, 0, w, h);
 			ctx.strokeStyle = 'black';
@@ -102,6 +107,7 @@ sap.ui.define([
 		},
 
 		createFood: function () {
+			//Erstellt an einer zufälligen Position auf dem Spielfeld ein Food
 			food = {
 				x: Math.floor((Math.random() * 30) + 1),
 				y: Math.floor((Math.random() * 30) + 1)
@@ -119,6 +125,7 @@ sap.ui.define([
 		},
 
 		checkCollision: function (x, y, array) {
+			//Prüft ob die Schlange mit der Wand koolidiert
 			for (var i = 0; i < array.length; i++) {
 				if (array[i].x === x && array[i].y === y)
 					return true;
@@ -126,13 +133,15 @@ sap.ui.define([
 			return false;
 		},
 		addKeyListen: function() {
+			//In diese Funktion wird ein Event hinzugefügt
+			//Das Event wird bei jedem Tastendrück ausgelöst
 			$(document).keydown(function(event) {
 
 				var keyCode = window.event.keyCode;
 				keyCode = event.keyCode;
 
 				switch (keyCode) {
-
+				//Tasten=> Empfehlung Pfeiltasten
 				case 37:
 					if (direction != 'right') {
 						direction = 'left';
@@ -165,21 +174,28 @@ sap.ui.define([
 		},
 
 		onAfterRendering: function () {
+			//Nicht Standard UI5 nur für dieses Projekt
 			mycanvas = document.getElementById('mycanvas');
 			ctx = mycanvas.getContext('2d');
+			//Control für den button
 			btn = this.byId('btn');
 			this.addKeyListen();
+			direction = 'down';
+			//Startet das Spiel
 			btn.attachEvent("press", function () {
+				//Spiel initiieren
 				this.drawSnake();
 				this.createFood();
 				var self = this;
+				//Loop
 				this.gameloop = setInterval(
 					function () {
+						//Loop Methode des Spiels
 						self.paint();
 					},
 					120);
 			}, this);
-			direction = 'down';
+			
 			//	gameloop = setInterval(this.paint, 80);
 		}
 
