@@ -10,7 +10,7 @@ sap.ui.define([
 	var score = 0;
 	var snake;
 	var snakeSize = 10;
-	var food;
+	var food; // JSON aus x und y position
 	var direction;
 	var gameloop;
 	var btn;
@@ -63,15 +63,7 @@ sap.ui.define([
 			var snakeX = snake[0].x;
 			var snakeY = snake[0].y;
 
-			if (direction == 'right') {
-				snakeX++;
-			} else if (direction == 'left') {
-				snakeX--;
-			} else if (direction == 'up') {
-				snakeY--;
-			} else if (direction == 'down') {
-				snakeY++;
-			}
+			//TODO move snakeX or snakeY according to the direction
 
 			if (snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize || this.checkCollision(snakeX, snakeY, snake)) {
 				//restart game
@@ -108,67 +100,26 @@ sap.ui.define([
 
 		createFood: function () {
 			//Erstellt an einer zufälligen Position auf dem Spielfeld ein Food
-			food = {
-				x: Math.floor((Math.random() * 30) + 1),
-				y: Math.floor((Math.random() * 30) + 1)
-			};
-
-			for (var i = 0; i > snake.length; i++) {
-				var snakeX = snake[i].x;
-				var snakeY = snake[i].y;
-
-				if (food.x === snakeX && food.y === snakeY || food.y === snakeY && food.x === snakeX) {
-					food.x = Math.floor((Math.random() * 30) + 1);
-					food.y = Math.floor((Math.random() * 30) + 1);
-				}
-			}
+			//TODO fülle die Food-Variable mit neuen Koordinaten
+			//TODO kein Food unter der Schlange erstellen
+			//TODO Kein Rückgabe wert notwendig da globale Variable
 		},
 
 		checkCollision: function (x, y, array) {
 			//Prüft ob die Schlange mit der Wand koolidiert
-			for (var i = 0; i < array.length; i++) {
-				if (array[i].x === x && array[i].y === y)
-					return true;
-			}
-			return false;
+			//TODO Prüfe auf Kollision mit der Wand
 		},
-		addKeyListen: function() {
+		addKeyListen: function () {
 			//In diese Funktion wird ein Event hinzugefügt
 			//Das Event wird bei jedem Tastendrück ausgelöst
-			$(document).keydown(function(event) {
+			$(document).keydown(function (event) {
 
 				var keyCode = window.event.keyCode;
 				keyCode = event.keyCode;
 
 				switch (keyCode) {
-				//Tasten=> Empfehlung Pfeiltasten
-				case 37:
-					if (direction != 'right') {
-						direction = 'left';
-					}
-					console.log('left');
-					break;
-
-				case 39:
-					if (direction != 'left') {
-						direction = 'right';
-						console.log('right');
-					}
-					break;
-
-				case 38:
-					if (direction != 'down') {
-						direction = 'up';
-						console.log('up');
-					}
-					break;
-
-				case 40:
-					if (direction != 'up') {
-						direction = 'down';
-						console.log('down');
-					}
-					break;
+					//Tasten=> Empfehlung Pfeiltasten
+					//TODO Cases pro KeyCode
 				}
 			});
 		},
@@ -195,7 +146,7 @@ sap.ui.define([
 					},
 					120);
 			}, this);
-			
+
 			//	gameloop = setInterval(this.paint, 80);
 		}
 
