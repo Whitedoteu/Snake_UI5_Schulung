@@ -12,6 +12,7 @@
 			data-sap-ui-libs="sap.m"
 			data-sap-ui-theme="sap_belize"
 			data-sap-ui-compatVersion="edge"
+<<<<<<< HEAD
 			data-sap-ui-resourceroots='{"Snake.Game": "./"}'>
 		</script>
 
@@ -23,6 +24,19 @@
 					app: new sap.ui.core.ComponentContainer({
 						height : "100%",
 						name : "Snake.Game"
+=======
+			data-sap-ui-resourceroots='{"test.test": "./"}'>
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "test.test"
+>>>>>>> refs/heads/master
 					})
 				}).placeAt("content");
 			});
