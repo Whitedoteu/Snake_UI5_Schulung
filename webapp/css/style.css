@@ -1,0 +1,26 @@
+#home {
+      width: 600px;
+      height: 600px;
+      background-image: url('../img/snake.png');
+      background-size: auto 600px;
+      background-repeat: no-repeat;
+      background-color: lightblue;
+      background-position: center center;
+      padding: 0;
+      margin: 03;
+
+    }
+   
+
+    p {
+      font-family: Helvetica;
+      font-weight: bold;
+      width: 250px;
+      margin: 18px 0 5px 8px;
+      float: left;
+    }
+
+    .game {
+      margin: 0 auto;
+    }
+
