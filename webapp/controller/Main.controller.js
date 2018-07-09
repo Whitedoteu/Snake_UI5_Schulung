@@ -142,7 +142,7 @@ sap.ui.define([
 
 				switch (keyCode) {
 				//Tasten=> Empfehlung Pfeiltasten
-				case :
+				case 37:
 					if (direction != 'right') {
 						direction = 'left';
 					}
